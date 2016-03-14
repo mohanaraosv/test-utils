@@ -62,12 +62,5 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${jcl.over.slf4j.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.edb.fs.enterprise.corews.cus.srv</groupId>
-			<artifactId>cus-srv-ws</artifactId>
-			<version>16.7-SNAPSHOT</version>
-			<type>jar</type>
-			<classifier>classes</classifier>
-		</dependency>
 	</dependencies>
 </project>
