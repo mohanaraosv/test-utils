@@ -1,4 +1,4 @@
-package com.edb.fs.enterprise.corews.soapui;
+package com.mycompany.test.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,10 +15,10 @@ import org.junit.runners.Parameterized.Parameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.edb.fs.enterprise.corews.common.test.AbstractTest;
+import com.mycompany.test.model.TestModel;
 
 @RunWith(Parameterized.class)
-public class ParameterizedTest extends AbstractTest {
+public class ParameterizedTest {
 
     protected final Logger    logger = LoggerFactory.getLogger(getClass());
     protected final TestModel testModel;
@@ -59,5 +59,4 @@ public class ParameterizedTest extends AbstractTest {
         logger.info(testModel.getTestCase());
         logger.info(testModel.getTestSuite());
     }
-
 }

@@ -10,6 +10,8 @@ import java.lang.reflect.Modifier;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.edb.fs.enterprise.corews.cus.srv.model.archivekey.ArchiveKeyGroupResult;
+
 /**
  * Class to generate assert statements for mapper test classes
  * 
@@ -18,14 +20,14 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class GenerateAssertsUpdated {
 
-    public static final String ASSERT_THAT = "assertThat(";
+    public static final String ASSERT_THAT  = "assertThat(";
 
-    public static final String IS_EQUAL_TO = ", is(equalTo(";
+    public static final String IS_EQUAL_TO  = ", is(equalTo(";
 
     public static final String CLOSED_BRACE = ")));";
 
     public static void main(final String[] args) {
-        //  printAsserts(ListRoleProduct.class, "listRoleProductResponse", "listRoleProductResponseType");
+        printAsserts(ArchiveKeyGroupResult.class, "archiveResult", "archiveResultType");
     }
 
     /**
@@ -39,7 +41,7 @@ public class GenerateAssertsUpdated {
         for (Method method : clazz.getDeclaredMethods()) {
             if (Modifier.isPublic(method.getModifiers()) && (method.getParameterTypes().length == 0) && (method.getReturnType() != void.class)
                     && (method.getName().startsWith("get") || method.getName().startsWith("is"))) {
-                Class< ? > value = method.getReturnType();
+                Class<?> value = method.getReturnType();
                 printAssertsBasedDataType(method, sourceRefName, destRefName);
                 if (!value.getName().contains("Date") && (null != value.getSuperclass()) && value.getSuperclass().getName().contains("AbstractVo")) {
                     String className = value.getName().substring(value.getName().lastIndexOf(".") + 1);
@@ -52,10 +54,10 @@ public class GenerateAssertsUpdated {
     }
 
     private static void printAssertsBasedDataType(final Method method, final String sourceRefName, final String destRefName) {
-        Class< ? > value = method.getReturnType();
+        Class<?> value = method.getReturnType();
         if (!value.isEnum() && !value.getName().contains("Date")) {
-            System.out.println(ASSERT_THAT + sourceRefName + StringUtils.substring(method.toString(), method.toString().lastIndexOf(".") + 1) + IS_EQUAL_TO + destRefName
-                    + StringUtils.substring(method.toString(), method.toString().lastIndexOf(".") + 1) + CLOSED_BRACE);
+            System.out.println(ASSERT_THAT + sourceRefName + "." + StringUtils.substring(method.toString(), method.toString().lastIndexOf(".") + 1) + IS_EQUAL_TO + destRefName
+                    + "." + StringUtils.substring(method.toString(), method.toString().lastIndexOf(".") + 1) + CLOSED_BRACE);
         } else if (value.getName().contains("Date")) {
             System.out.println(ASSERT_THAT + sourceRefName + StringUtils.substring(method.toString(), method.toString().lastIndexOf(".") + 1) + ".getSqlDateObject()" + IS_EQUAL_TO
                     + destRefName + StringUtils.substring(method.toString(), method.toString().lastIndexOf(".") + 1) + CLOSED_BRACE);
@@ -73,7 +75,7 @@ public class GenerateAssertsUpdated {
      */
     public static String getFieldName(final Method method) {
         try {
-            Class< ? > clazz = method.getDeclaringClass();
+            Class<?> clazz = method.getDeclaringClass();
             BeanInfo info = Introspector.getBeanInfo(clazz);
             PropertyDescriptor[] props = info.getPropertyDescriptors();
             for (PropertyDescriptor pd : props) {
