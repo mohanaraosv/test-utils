@@ -1,11 +1,11 @@
 /**
- * 
+ *
  */
 
 package com.mycompany.test.util;
 
 /**
- * @author e210636
+ * @author Mohana Rao S V
  *
  */
 public class SuperClass {

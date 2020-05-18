@@ -14,13 +14,13 @@ import java.util.jar.JarFile;
  */
 
 /**
- * @author mohana rao s v
+ * @author e210636
  *
  */
-public class CulpritJar {
+public class FindAnnotations {
 
-    public static void main(final String[] args) throws IOException, ClassNotFoundException {
-        File folder = new File("D:/core/valid-location-for-jars-files");
+    public static void main(final String[] args) throws IOException {
+        File folder = new File("C:/Projectdata/extreme/spring-boot-cxf-rest/target/spring-boot-cxf-rest-1.0.0-SNAPSHOT/WEB-INF/spring");
         File[] listOfFiles = folder.listFiles();
         for (File listOfFile : listOfFiles) {
             JarFile jarFile = new JarFile(listOfFile);
@@ -35,10 +35,17 @@ public class CulpritJar {
                 // -6 because of .class
                 String className = je.getName().substring(0, je.getName().length() - 6);
                 className = className.replace('/', '.');
-                if ("com.edb.fs.enterprise.domain.common.v2.PagingInputElementType".equals(className)) {
-                    System.out.println(jarFile.getName());
-                    Class c = cl.loadClass(className);
-                    System.out.println(c);
+                System.out.println("jarname " + jarFile.getName());
+                if (!className.contains("module-info")) {
+                    Class c = null;
+                    try {
+                        c = cl.loadClass(className);
+                    } catch (ClassNotFoundException | java.lang.NoClassDefFoundError e1) {
+                        System.out.println("Missing class" + e1);
+                    }
+                    if ((null != c) && c.isAnnotation()) {
+                        System.out.println("" + c);
+                    }
                 }
             }
         }
