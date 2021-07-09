@@ -9,7 +9,7 @@
   <properties>
     <commons.lang.version>3.10</commons.lang.version>
     <commons.collections.version>3.2.2</commons.collections.version>
-    <junit.version>4.12</junit.version>
+    <junit.version>4.13.1</junit.version>
     <slf4j.version>1.7.30</slf4j.version>
     <logback.version>1.2.3</logback.version>
     <jcl.over.slf4j.version>1.7.30</jcl.over.slf4j.version>
